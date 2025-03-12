@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { CharacterResponse } from "../models/character";
 import { GET_CHARACTERS } from "../service/queries";
 import CharacterCard from "./CharacterCard";
+import Pagination from "./Pagination";
 
 interface CharacterListProps {
     language: "en" | "de";
@@ -24,29 +25,26 @@ const CharacterList: React.FC<CharacterListProps> = ({ language }) => {
         <h1 className="text-center my-4">
           {language === "en" ? "Rick and Morty Characters" : "Rick und Morty Charaktere"}
         </h1>
-  
+        <Pagination 
+          page={page}
+          setPage={setPage}
+          hasNext={!!data?.characters.info.next}
+          hasPrev={!!data?.characters.info.prev}
+          language={language}
+        ></Pagination>
         <div className="row">
           {data?.characters.results.map((character) => (
             <CharacterCard key={character.id} character={character} language={language} />
           ))}
         </div>
   
-        <div className="d-flex justify-content-center my-4">
-          <button
-            className="btn btn-primary mx-2"
-            onClick={() => setPage((prev) => prev - 1)}
-            disabled={!data?.characters.info.prev}
-          >
-            {language === "en" ? "Previous" : "Zurück"}
-          </button>
-          <button
-            className="btn btn-primary mx-2"
-            onClick={() => setPage((prev) => prev + 1)}
-            disabled={!data?.characters.info.next}
-          >
-            {language === "en" ? "Next" : "Weiter"}
-          </button>
-        </div>
+        <Pagination 
+          page={page}
+          setPage={setPage}
+          hasNext={!!data?.characters.info.next}
+          hasPrev={!!data?.characters.info.prev}
+          language={language}
+        ></Pagination>
       </div>
     );
 }
