@@ -8,8 +8,8 @@ function App() {
   const [language, setLanguage] = useState<"en" | "de">("en")
   return (
     <div className='container'>
-      <LanguageSwitcher language={language} setLanguage={setLanguage} />
       <CharacterList language={language} />
+      <LanguageSwitcher language={language} setLanguage={setLanguage} />
       </div>
   )
 }
