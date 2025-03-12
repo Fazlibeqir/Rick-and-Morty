@@ -1,25 +1,19 @@
 import React from 'react'
+import { useQuery } from '@apollo/client'
 import CharacterCard from './components/CharacterCard'
-import { Character } from './models/character'
+import {CharacterResponse } from './models/character'
+import { GET_CHARACTERS } from './service/queries'
 import './App.css'
 
-const characters: Character[] = [
-  {
-    id: '1',
-    name: 'Rick Sanchez', 
-    species: 'Human',
-    gender: 'Male',
-    status: 'Alive',
-    origin: {
-      name: 'Earth',
-    },
-  },]
-
 function App() {
-
+  const {loading, error, data} = useQuery<CharacterResponse>(GET_CHARACTERS, {
+    variables: {page: 1, status: "", species: ""},
+  })
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error</p>
   return (
     <div>
-      {characters.map((character) => (
+      {data?.characters.results.map((character) => (
         <CharacterCard key={character.id} character={character} />
       ))}
     </div>
