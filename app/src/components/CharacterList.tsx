@@ -19,24 +19,35 @@ const CharacterList: React.FC<CharacterListProps> = ({ language }) => {
     if (loading) return <p>{language === "en" ? "Loading..." : "Lädt..."}</p>;
     if (error) return <p>{language === "en" ? "Error loading data" : "Fehler beim Laden der Daten"}</p>;
     return (
-        <div>
-            {/* TODO make filters*/}
-            <div className="character-grid">
-                <h1>{language === "en" ? "Rick and Morty Characters" : "Rick und Morty Charaktere"}</h1>
-                {data?.characters.results.map((character) => (
-                    <CharacterCard key={character.id} character={character} language={language} />
-                ))}
-            </div>
-
-            <div className="pagination">
-                <button onClick={() => setPage((prev) => prev - 1)} disabled={!data?.characters.info.prev}>
-                    {language === "en" ? "Previous" : "Zurück"}
-                </button>
-                <button onClick={() => setPage((prev) => prev + 1)} disabled={!data?.characters.info.next}>
-                    {language === "en" ? "Next" : "Weiter"}
-                </button>
-            </div>
+        <div className="container">
+            {/* TODO make filters */}
+        <h1 className="text-center my-4">
+          {language === "en" ? "Rick and Morty Characters" : "Rick und Morty Charaktere"}
+        </h1>
+  
+        <div className="row">
+          {data?.characters.results.map((character) => (
+            <CharacterCard key={character.id} character={character} language={language} />
+          ))}
         </div>
+  
+        <div className="d-flex justify-content-center my-4">
+          <button
+            className="btn btn-primary mx-2"
+            onClick={() => setPage((prev) => prev - 1)}
+            disabled={!data?.characters.info.prev}
+          >
+            {language === "en" ? "Previous" : "Zurück"}
+          </button>
+          <button
+            className="btn btn-primary mx-2"
+            onClick={() => setPage((prev) => prev + 1)}
+            disabled={!data?.characters.info.next}
+          >
+            {language === "en" ? "Next" : "Weiter"}
+          </button>
+        </div>
+      </div>
     );
 }
 

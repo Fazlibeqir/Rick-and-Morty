@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client'
 import { ApolloProvider, InMemoryCache, ApolloClient } from '@apollo/client'
 import './index.css'
 import App from './App.tsx'
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 const client = new ApolloClient({
   uri: "https://rickandmortyapi.com/graphql",
