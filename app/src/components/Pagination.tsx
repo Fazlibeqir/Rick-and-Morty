@@ -12,7 +12,7 @@ const Pagination: React.FC<PaginationProps> = ({ page, setPage, hasNext, hasPrev
         <div className="d-flex justify-content-center my-4">
             <button
                 className="btn btn-primary mx-2"
-                onClick={() => setPage((prev) => prev - 1)}
+                onClick={() => setPage(page - 1)}
                 disabled={!hasPrev}
             >
                 {language === "en" ? "Previous" : "Zurück"}
@@ -22,7 +22,7 @@ const Pagination: React.FC<PaginationProps> = ({ page, setPage, hasNext, hasPrev
             </span>
             <button
                 className="btn btn-primary mx-2"
-                onClick={() => setPage((prev) => prev + 1)}
+                onClick={() => setPage(page + 1)}
                 disabled={!hasNext}
             >
                 {language === "en" ? "Next" : "Weiter"}
